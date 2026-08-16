@@ -397,7 +397,7 @@
         throw new Error(data.message || "未知錯誤");
       }
     } catch(err){
-      statusMsg.textContent = "送出失敗，請稍後再試或直接聯繫店家。";
+      statusMsg.textContent = "送出失敗（除錯訊息：" + err.message + "）";
       statusMsg.className = "status err";
       submitBtn.disabled = false;
     }
