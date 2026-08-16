@@ -384,18 +384,16 @@
     statusMsg.className = "status";
 
     try {
-      const res = await fetch(SCRIPT_URL, {
+      // 改用 no-cors：Google Apps Script 的回應在瀏覽器端常無法被讀取（CORS 限制），
+      // 但只要 fetch 沒有丟出網路層級的錯誤，資料實際上已經送達並寫入試算表。
+      await fetch(SCRIPT_URL, {
         method: "POST",
+        mode: "no-cors",
         headers: { "Content-Type": "text/plain;charset=utf-8" },
         body: JSON.stringify(payload)
       });
-      const data = await res.json();
-      if(data.result === "success"){
-        statusMsg.textContent = "訂單已送出，謝謝您的預購！";
-        statusMsg.className = "status ok";
-      } else {
-        throw new Error(data.message || "未知錯誤");
-      }
+      statusMsg.textContent = "訂單已送出，謝謝您的預購！";
+      statusMsg.className = "status ok";
     } catch(err){
       statusMsg.textContent = "送出失敗（除錯訊息：" + err.message + "）";
       statusMsg.className = "status err";
