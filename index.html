@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>桃桃手作中秋禮盒預購單</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --night: #2B2640;
+    --night-2: #3A2A4D;
+    --peach: #E8927C;
+    --peach-light: #F3C6B4;
+    --gold: #D4A657;
+    --gold-light: #EFD9A8;
+    --paper: #FBF6EF;
+    --paper-2: #F4EBDD;
+    --ink: #3A2A3D;
+    --ink-soft: #6B5A68;
+    --line: rgba(58,42,61,0.14);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Noto Sans TC", sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:760px;margin:0 auto;padding:0 20px 80px;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background: radial-gradient(circle at 50% -10%, var(--night-2) 0%, var(--night) 55%, #211C33 100%);
+    padding:56px 20px 90px;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::after{
+    content:"";
+    position:absolute; left:0; right:0; bottom:0; height:60px;
+    background: linear-gradient(180deg, transparent, var(--paper));
+  }
+  .eyebrow{
+    color:var(--gold-light);
+    letter-spacing:0.35em;
+    font-size:12px;
+    font-weight:500;
+    margin-bottom:18px;
+  }
+  .moon-stage{
+    width:132px;height:132px;margin:0 auto 22px;
+    position:relative;
+    filter: drop-shadow(0 0 26px rgba(212,166,87,0.45));
+  }
+  .moon-base{
+    width:100%;height:100%;border-radius:50%;
+    background: radial-gradient(circle at 35% 32%, #FFF3D6, var(--gold) 60%, #B8823C 100%);
+  }
+  .moon-shade{
+    position:absolute; top:0; left:0; width:100%; height:100%;
+    border-radius:50%;
+    background: var(--night);
+    transform: translateX(88%);
+    transition: transform 0.6s cubic-bezier(.4,0,.2,1);
+  }
+  .moon-pct{
+    margin-top:10px;
+    color:var(--peach-light);
+    font-size:12px;
+    letter-spacing:0.08em;
+  }
+  h1{
+    font-family:"Noto Serif TC", serif;
+    font-weight:900;
+    color:var(--paper);
+    font-size:34px;
+    margin:0 0 10px;
+    line-height:1.3;
+  }
+  .hero p.sub{
+    color:var(--peach-light);
+    font-size:14px;
+    margin:0;
+    letter-spacing:0.04em;
+  }
+
+  /* ---------- SECTION ---------- */
+  section{margin-top:-40px; position:relative; z-index:2;}
+  .card{
+    background:#fff;
+    border-radius:18px;
+    padding:24px 22px;
+    box-shadow: 0 10px 30px rgba(58,42,61,0.08);
+    margin-bottom:18px;
+  }
+  .section-title{
+    font-family:"Noto Serif TC", serif;
+    font-weight:700;
+    font-size:18px;
+    margin:0 0 4px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .section-title .num{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:24px;height:24px;border-radius:50%;
+    background:var(--peach); color:#fff; font-size:12px; font-weight:700;
+  }
+  .section-desc{color:var(--ink-soft); font-size:13px; margin:0 0 18px;}
+
+  /* products */
+  .product{
+    display:flex; align-items:center; gap:14px;
+    padding:14px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .product:last-child{border-bottom:none;}
+  .product-icon{
+    width:56px;height:56px;border-radius:14px;flex:none;
+    display:flex;align-items:center;justify-content:center;
+    font-size:24px;
+    background: linear-gradient(135deg, var(--gold-light), var(--peach-light));
+    box-shadow: inset 0 0 0 1px rgba(212,166,87,0.35);
+  }
+  .product-info{flex:1; min-width:0;}
+  .product-name{font-weight:700; font-size:15px; margin:0 0 2px;}
+  .product-price{color:var(--ink-soft); font-size:13px; margin:0;}
+  .stepper{
+    display:flex; align-items:center; gap:0;
+    border:1px solid var(--line); border-radius:10px; overflow:hidden; flex:none;
+  }
+  .stepper button{
+    width:32px;height:32px; border:none; background:var(--paper-2);
+    color:var(--night); font-size:16px; cursor:pointer;
+  }
+  .stepper button:active{background:var(--peach-light);}
+  .stepper input{
+    width:36px; text-align:center; border:none; font-size:14px;
+    font-weight:700; color:var(--ink); background:#fff;
+    -moz-appearance:textfield;
+  }
+  .stepper input::-webkit-outer-spin-button,
+  .stepper input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}
+
+  /* form fields */
+  .field{margin-bottom:16px;}
+  .field label{display:block; font-size:13px; font-weight:700; margin-bottom:7px; color:var(--ink);}
+  .field input[type=text], .field input[type=tel]{
+    width:100%; padding:12px 14px; border-radius:10px;
+    border:1px solid var(--line); font-size:14px; font-family:inherit;
+    background:var(--paper-2); color:var(--ink);
+  }
+  .field input:focus{outline:2px solid var(--peach); outline-offset:1px;}
+  .date-options{display:flex; gap:10px; flex-wrap:wrap;}
+  .date-chip{
+    flex:1; min-width:96px; text-align:center;
+    padding:12px 10px; border-radius:10px;
+    border:1px solid var(--line); background:var(--paper-2);
+    font-weight:700; font-size:14px; cursor:pointer; color:var(--ink);
+    transition: all .15s ease;
+  }
+  .date-chip input{display:none;}
+  .date-chip.active{
+    background:var(--night); color:var(--gold-light); border-color:var(--night);
+  }
+
+  /* summary */
+  .summary-row{
+    display:flex; justify-content:space-between; font-size:13.5px;
+    padding:6px 0; color:var(--ink-soft);
+  }
+  .summary-row.empty{font-style:italic;}
+  .summary-total{
+    display:flex; justify-content:space-between;
+    border-top:1px solid var(--line); margin-top:8px; padding-top:12px;
+    font-size:17px; font-weight:900; color:var(--ink);
+  }
+  .summary-total span:last-child{color:var(--peach); font-family:"Noto Serif TC", serif;}
+
+  button.submit{
+    width:100%; padding:16px; border:none; border-radius:12px;
+    background: linear-gradient(135deg, var(--night), var(--night-2));
+    color:var(--gold-light); font-size:16px; font-weight:700;
+    font-family:"Noto Serif TC", serif; letter-spacing:0.05em;
+    cursor:pointer; margin-top:6px;
+  }
+  button.submit:disabled{opacity:0.5; cursor:not-allowed;}
+  button.submit:active:not(:disabled){transform:translateY(1px);}
+
+  .status{
+    text-align:center; font-size:13.5px; margin-top:14px; min-height:18px;
+  }
+  .status.ok{color:#3d7a4f;}
+  .status.err{color:#b0473f;}
+
+  .footnote{
+    text-align:center; color:var(--ink-soft); font-size:12px; margin-top:24px; line-height:1.7;
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="eyebrow">早鳥預購 ・ 手作限量</div>
+  <div class="moon-stage">
+    <div class="moon-base"></div>
+    <div class="moon-shade" id="moonShade"></div>
+  </div>
+  <div class="moon-pct" id="moonPct">填寫進度 0%</div>
+  <h1>桃桃手作<br>中秋禮盒預購單</h1>
+  <p class="sub">選好禮盒 ・ 填寫資料 ・ 訂單將自動送出彙整</p>
+</div>
+
+<div class="wrap">
+  <section>
+
+    <div class="card">
+      <p class="section-title"><span class="num">1</span> 選擇禮盒品項</p>
+      <p class="section-desc">可複選，數量請用左右按鈕調整</p>
+      <div id="productList"></div>
+    </div>
+
+    <div class="card">
+      <p class="section-title"><span class="num">2</span> 訂購人資料</p>
+      <div class="field">
+        <label for="custName">訂購人姓名</label>
+        <input type="text" id="custName" placeholder="請輸入姓名">
+      </div>
+      <div class="field">
+        <label for="custPhone">聯絡電話</label>
+        <input type="tel" id="custPhone" placeholder="請輸入手機號碼">
+      </div>
+      <div class="field" style="margin-bottom:0;">
+        <label>取貨日</label>
+        <div class="date-options" id="dateOptions">
+          <label class="date-chip" data-date="9/27"><input type="radio" name="pickup" value="9/27">9/27</label>
+          <label class="date-chip" data-date="9/28"><input type="radio" name="pickup" value="9/28">9/28</label>
+          <label class="date-chip" data-date="10/3"><input type="radio" name="pickup" value="10/3">10/3</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <p class="section-title"><span class="num">3</span> 訂單明細</p>
+      <div id="summaryList"><div class="summary-row empty">尚未選擇任何品項</div></div>
+      <div class="summary-total"><span>總金額</span><span id="totalAmount">NT$0</span></div>
+      <button class="submit" id="submitBtn" disabled>送出訂單</button>
+      <div class="status" id="statusMsg"></div>
+    </div>
+
+    <p class="footnote">送出後訂單將自動彙整至店家系統，如需修改請直接與店家聯繫。<br>桃桃手作 ・ 中秋節限定預購</p>
+
+  </section>
+</div>
+
+<script>
+  // ⚠️ 請將下方網址換成您自己部署的 Google Apps Script 網路應用程式網址
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyo90WkQTEMGuMY9uhyo53Kf1zOBzUC87sJ4cBoSX9AWmg0iEZA2tUsyFjS2qWhnJoQ/exec";
+
+  const PRODUCTS = [
+    { id:"p1", name:"綜合蛋黃酥 6入", price:480, icon:"🥮" },
+    { id:"p2", name:"綜合蛋黃酥 12入", price:960, icon:"🥮" },
+    { id:"p3", name:"小月娘蛋黃酥 6入", price:500, icon:"🌙" },
+    { id:"p4", name:"金沙小月餅 6入", price:450, icon:"✨" },
+    { id:"p5", name:"不一樣蛋黃酥 6入", price:550, icon:"🌕" },
+    { id:"p6", name:"桃 綠豆椪 6入", price:400, icon:"🍑" },
+    { id:"p7", name:"桃 可麗露 4入", price:350, icon:"🍮" },
+  ];
+
+  const state = { qty:{}, name:"", phone:"", date:"" };
+  PRODUCTS.forEach(p => state.qty[p.id] = 0);
+
+  const productListEl = document.getElementById("productList");
+  const summaryListEl = document.getElementById("summaryList");
+  const totalAmountEl = document.getElementById("totalAmount");
+  const submitBtn = document.getElementById("submitBtn");
+  const statusMsg = document.getElementById("statusMsg");
+  const moonShade = document.getElementById("moonShade");
+  const moonPct = document.getElementById("moonPct");
+
+  function renderProducts(){
+    productListEl.innerHTML = PRODUCTS.map(p => `
+      <div class="product">
+        <div class="product-icon">${p.icon}</div>
+        <div class="product-info">
+          <p class="product-name">${p.name}</p>
+          <p class="product-price">NT$${p.price}</p>
+        </div>
+        <div class="stepper">
+          <button type="button" data-action="dec" data-id="${p.id}">－</button>
+          <input type="text" inputmode="numeric" id="qty-${p.id}" value="0" readonly>
+          <button type="button" data-action="inc" data-id="${p.id}">＋</button>
+        </div>
+      </div>
+    `).join("");
+  }
+
+  function updateSummary(){
+    const items = PRODUCTS.filter(p => state.qty[p.id] > 0);
+    if(items.length === 0){
+      summaryListEl.innerHTML = `<div class="summary-row empty">尚未選擇任何品項</div>`;
+    } else {
+      summaryListEl.innerHTML = items.map(p => `
+        <div class="summary-row"><span>${p.name} x${state.qty[p.id]}</span><span>NT$${p.price * state.qty[p.id]}</span></div>
+      `).join("");
+    }
+    const total = items.reduce((sum,p) => sum + p.price * state.qty[p.id], 0);
+    totalAmountEl.textContent = `NT$${total}`;
+    checkFormComplete();
+    updateMoon();
+  }
+
+  function updateMoon(){
+    let steps = 0;
+    if(state.name.trim()) steps++;
+    if(state.phone.trim()) steps++;
+    if(state.date) steps++;
+    if(Object.values(state.qty).some(q => q > 0)) steps++;
+    const pct = steps / 4;
+    // shade slides from fully covering (88%) to fully away (-100%)
+    const offset = 88 - pct * 188;
+    moonShade.style.transform = `translateX(${offset}%)`;
+    moonPct.textContent = `填寫進度 ${Math.round(pct*100)}%`;
+  }
+
+  function checkFormComplete(){
+    const hasItems = Object.values(state.qty).some(q => q > 0);
+    const ready = hasItems && state.name.trim() && state.phone.trim() && state.date;
+    submitBtn.disabled = !ready;
+  }
+
+  productListEl.addEventListener("click", (e) => {
+    const btn = e.target.closest("button");
+    if(!btn) return;
+    const id = btn.dataset.id;
+    const action = btn.dataset.action;
+    if(action === "inc") state.qty[id]++;
+    if(action === "dec") state.qty[id] = Math.max(0, state.qty[id]-1);
+    document.getElementById(`qty-${id}`).value = state.qty[id];
+    updateSummary();
+  });
+
+  document.getElementById("custName").addEventListener("input", (e) => {
+    state.name = e.target.value; checkFormComplete(); updateMoon();
+  });
+  document.getElementById("custPhone").addEventListener("input", (e) => {
+    state.phone = e.target.value; checkFormComplete(); updateMoon();
+  });
+  document.getElementById("dateOptions").addEventListener("click", (e) => {
+    const chip = e.target.closest(".date-chip");
+    if(!chip) return;
+    document.querySelectorAll(".date-chip").forEach(c => c.classList.remove("active"));
+    chip.classList.add("active");
+    chip.querySelector("input").checked = true;
+    state.date = chip.dataset.date;
+    checkFormComplete(); updateMoon();
+  });
+
+  submitBtn.addEventListener("click", async () => {
+    const items = PRODUCTS.filter(p => state.qty[p.id] > 0);
+    const total = items.reduce((sum,p) => sum + p.price * state.qty[p.id], 0);
+    const itemsSummary = items.map(p => `${p.name} x${state.qty[p.id]}`).join("、");
+
+    const payload = {
+      name: state.name.trim(),
+      phone: state.phone.trim(),
+      pickupDate: state.date,
+      itemsSummary,
+      total
+    };
+
+    if(SCRIPT_URL.includes("PASTE_YOUR")){
+      statusMsg.textContent = "尚未設定 Google Sheets 連結網址，訂單無法送出。";
+      statusMsg.className = "status err";
+      return;
+    }
+
+    submitBtn.disabled = true;
+    statusMsg.textContent = "送出中，請稍候...";
+    statusMsg.className = "status";
+
+    try {
+      const res = await fetch(SCRIPT_URL, {
+        method: "POST",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+      if(data.result === "success"){
+        statusMsg.textContent = "訂單已送出，謝謝您的預購！";
+        statusMsg.className = "status ok";
+      } else {
+        throw new Error(data.message || "未知錯誤");
+      }
+    } catch(err){
+      statusMsg.textContent = "送出失敗，請稍後再試或直接聯繫店家。";
+      statusMsg.className = "status err";
+      submitBtn.disabled = false;
+    }
+  });
+
+  renderProducts();
+  updateSummary();
+</script>
+
+</body>
+</html>
