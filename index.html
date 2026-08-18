@@ -584,6 +584,7 @@
     );
     const total = subtotal + shipping.pastry + shipping.canele;
     const itemsSummary = items.map(p => `${p.name} x${state.qty[p.id]}`).join("、");
+    const itemsDetail = items.map(p => ({ name: p.name, qty: state.qty[p.id], lineTotal: p.price * state.qty[p.id] }));
 
     const payload = {
       name: state.name.trim(),
@@ -593,6 +594,7 @@
       address: state.fulfill === "delivery" ? state.address.trim() : "",
       note: state.note.trim(),
       itemsSummary,
+      items: itemsDetail,
       subtotal,
       pastryShipping: shipping.pastry,
       caneleShipping: shipping.canele,
