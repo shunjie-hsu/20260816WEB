@@ -367,6 +367,9 @@
   </section>
 </div>
 
+<iframe name="hiddenSubmitFrame" id="hiddenSubmitFrame" style="display:none;"></iframe>
+<form id="hiddenSubmitForm" method="POST" target="hiddenSubmitFrame" style="display:none;"></form>
+
 <script>
   const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwySuofU_wcG5I2xrrJKmqeG94AITK_-uAf71tft-AM_n_yapu1SJCVK7KpnERN4ZlmVw/exec";
 
@@ -607,14 +610,38 @@
     statusMsg.className = "status";
 
     try {
-      await fetch(SCRIPT_URL, {
-        method: "POST",
-        mode: "no-cors",
-        headers: { "Content-Type": "text/plain;charset=utf-8" },
-        body: JSON.stringify(payload)
+      const iframe = document.getElementById("hiddenSubmitFrame");
+      const form = document.getElementById("hiddenSubmitForm");
+      form.innerHTML = "";
+      const fields = {
+        name: payload.name,
+        phone: payload.phone,
+        fulfill: payload.fulfill,
+        pickupDate: payload.pickupDate,
+        address: payload.address,
+        note: payload.note,
+        itemsSummary: payload.itemsSummary,
+        itemsJson: JSON.stringify(payload.items),
+        subtotal: payload.subtotal,
+        pastryShipping: payload.pastryShipping,
+        caneleShipping: payload.caneleShipping,
+        shipping: payload.shipping,
+        total: payload.total
+      };
+      Object.keys(fields).forEach(key => {
+        const input = document.createElement("input");
+        input.type = "hidden";
+        input.name = key;
+        input.value = fields[key];
+        form.appendChild(input);
       });
-      statusMsg.textContent = "訂單已送出，謝謝您的預購！";
-      statusMsg.className = "status ok";
+      form.action = SCRIPT_URL;
+      form.submit();
+
+      setTimeout(() => {
+        statusMsg.textContent = "訂單已送出，謝謝您的預購！";
+        statusMsg.className = "status ok";
+      }, 900);
     } catch(err){
       statusMsg.textContent = "送出失敗（除錯訊息：" + err.message + "）";
       statusMsg.className = "status err";
